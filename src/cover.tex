@@ -4,10 +4,15 @@
 \def\Me{Bas Smits} % Title
 \author\Me
 \definecolor{title_white}{rgb}{1,1,1}
+\definecolor{title_black}{rgb}{0,0,0}
 \definecolor{title_grey}{rgb}{0.6,0.6,0.6}
 
+\thispagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+
+
        \addtolength{\topmargin}{1in}
-       \newpagecolor{black}
+       \newpagecolor{white}
        \vspace{\fill}
        \begingroup
 
@@ -17,19 +22,24 @@
 
          \centering
 
-           \vspace{10cm}
-           {\color{title_white} \scalebox{5.2}[10]{GAME ENGINE}}\\
+           \vspace{9.5cm}
+           \hrule width1.04\textwidth \vspace{0.25cm}
+           {\color{title_black} \scalebox{5.2}[10]{GAME ENGINE}}\\
            \setstretch{7.0}
-           {\color{title_grey} \scalebox{5.5}[9]{BLACK BOOK}}  \\ 
-\setstretch{13.0}
-           {\color{title_white} \scalebox{4.4}[4.8]{COMMANDER KEEN}}\\
+           {\color{title_grey} \scalebox{5.5}[9]{WHITE PAPERS}}  \\ 
+           \vspace{0.25cm} \hrule width1.04\textwidth
+\scalebox{5.5}[9]{}\setstretch{11.0}
+
+
+
+           {\color{title_black} \scalebox{4.4}[4.8]{COMMANDER KEEN}}\\
 \setstretch{10.0}
        \endgroup
 
        \setstretch{12.0}
 
        \begin{center}
-            {\color{title_white} \scalebox{2}[2]{v2026.01.29 by \textsc{\Me}}}
+            {\color{title_black} \scalebox{2}[2]{v1.0 by \textsc{\Me}}}
        \end{center}
 
 

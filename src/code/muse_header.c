@@ -14,6 +14,8 @@
 #define	LANDSND             3
 #define	THROWSND            4
 #define	DIVESND             5
+#define	GETPOWERSND         6
+#define	GETPOINTSSND        7
 [...]
 #define	GETKEYSND           23
 #define	GRAPESCREAMSND      24

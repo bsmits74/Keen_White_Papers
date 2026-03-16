@@ -4,7 +4,7 @@
 
 \section{Audio and Heartbeat} 
 \label{audio_and_heartbeat}
-Since DOS had no multitasking or thread support, programs could not run parallel tasks such as system heartbeat and sound playback independently. Therefore, they often relied on system interrupts to maintain a consistent game loop and timing.\\
+Since DOS had no multitasking or thread support, programs could not run parallel tasks such as system heartbeat and sound playback independently. Therefore, they often relied on system timer interrupts to maintain a consistent game loop and timing.\\
 
 \subsection{Introduction to interrupts}
 When the user presses a key on the keyboard, how does the program know to respond to that event? We can take educated guesses about what happens in that situation. Perhaps the keyboard controller flips a byte in a memory-mapped area somewhere? Maybe it stores the keypress in a temporary buffer and makes it available on an I/O port whenever the program is ready to receive it?\\
@@ -45,7 +45,7 @@ The audio and heartbeat system relies on two chips: the Intel 8253 Programmable 
 \end{figure}
 
 \par
-The PIT contains three counters in total. Counter \#1 is connected to the RAM in order to automatically perform something called "memory refresh" and was considered a "do not touch" part of the PIT. Counter \#2 is connected to the PC speaker and generates sounds, and will be explained in detail in the next section.\\
+The PIT contains three counters in total. Counter \#1 is connected to the RAM in order to automatically perform something called "memory refresh" and was considered a "do not touch" part of the PIT. Counter \#2 is connected to the PC speaker and generates sounds. This will be explained in detail in the next section.\\
 
 \par
 Counter \#0 is connected to the PIC, and when it hits zero it triggers IRQ 0 to the PIC. The PIC routes the IRQ to the Interrupt Vector Table (IVT), which is a list of pointers to corresponding ISR addresses in memory. The first eight interrupts in the IVT are processor exceptions, followed by hardware interrupts (IRQ 0--7), and finally software interrupts. IRQ 0 is mapped to interrupt \#8 and usually updates the operating system clock.
@@ -93,7 +93,7 @@ Each entry in the IVT can be reprogrammed to point to a custom ISR. By modifying
 IVT \#8, in its original ISR, not only operates the system clock but also manages the floppy disk motor. Specifically, it ensures the motor shuts off after a read or write operation. When IVT \#8 is hijacked, this functionality is bypassed, causing the floppy disk motor, after loading data from the disk, to run indefinitely. Although this does not cause issues, the constant spinning of the disk can be both noisy and confusing, potentially giving users the impression that data loading is still in progress.\\
 
 \par
-The current status of the disk motors is stored in the BIOS Data Area (BDA), which is a section of memory located at segment \cw{0040h}. The BDA stores many variables describing the state of the computer.\\
+The current status of the disk motors is stored in the BIOS Data Area (BDA), which is a section of memory located at segment \cw{0040h}. The BDA stores many variables describing the state of the computer\footnote{For a full overview of BIOS Data Area see https://www.stanislavs.org/helppc/bios\_data\_area.html.}.\\
 
 \begin{figure}[H]
 	\renewcommand{\arraystretch}{1.2}
@@ -113,13 +113,10 @@ The current status of the disk motors is stored in the BIOS Data Area (BDA), whi
 40:75h & 	Number of hard disk drives detected \\
 		\bottomrule
 	\end{tabularx}
-	\caption{Partial list of BIOS Data Area variables\protect\footnotemark.}
+	\caption{Partial list of BIOS Data Area variables.}
 \end{figure}
-% \addtocounter{footnote}{0}
-  \footnotetext{For a full overview of BIOS Data Area see https://www.stanislavs.org/helppc/bios\_data\_area.html.}
-   % \stepcounter{footnote}
 
-\pagebreak
+\par
 BIOS data address \cw{40:3Fh} stores the motor status, where bit 0 indicates whether the disk 1 motor is on and bit 1 if the disk 2 motor is on. BIOS data address \cw{40:40h} contains the disk motor shut-off counter. This counter is decremented by the timer interrupt vector. When the counter reaches 0, the disk motor is turned off.\\
 
 \par
@@ -192,7 +189,7 @@ In the time before Windows 95, there was no standard API for programming sound c
 \end{minipage}
 
 \par
-Each implementation of sound effects relies on directly accessing the I/O port of one of three sound cards: AdLib, Sound Blaster (using the AdLib sound) and PC speaker. Ultimately, only one kind of sound generator was used: FM Synthesizer (Frequency Modulation). \\
+Each implementation of sound effects relies on directly accessing the I/O port of one of three sound cards: AdLib, Sound Blaster (using the AdLib sound) and PC speaker. \\
 
 \par
 Sound effects are stored in two formats.
@@ -228,7 +225,7 @@ Earlier it was hinted that the PIT had three counters, of which counter \#2 was 
 
 
 \par
-A simple tone has only one frequency. As a practical example, say we want to play a middle C through the speaker. Middle C is 261.626Hz\footnote{261.626Hz for middle C is a consequence of the twelve-tone equal temperament, see https://en.wikipedia.org/wiki/12\_equal\_temperament.}, while the PIT clock runs at 1.193182MHz. Dividing the latter by the former and rounding to the nearest integer value yields 4561. To create a higher pitch, the counter value would need to be lower.\\
+A simple tone has only one frequency. As a practical example, say we want to play a middle C through the speaker, which is 261.626Hz\footnote{261.626Hz for middle C is a consequence of the twelve-tone equal temperament, see https://en.wikipedia.org/wiki/12\_equal\_temperament.}. With the PIT clock running at 1.193182MHz, setting counter \#2 to $\frac{1.193182MHz}{261.626Hz}=4561$ results in playing the middle C through the speaker. To create a higher pitch, the counter value would need to be lower.\\
 
 \par
 This integer value must be written to the PIT counter \#2 to produce the desired tone. While the counter is above 2280 the output signal is high, below that threshold the output signal is low. Once the counter reaches 0, it automatically resets to the initial value of 4561 and the cycle repeats. To adjust the frequency, write value \cw{b6h} to port \cw{43h} to set the PIT command register, followed by writing the desired counter value to port \cw{42h}.

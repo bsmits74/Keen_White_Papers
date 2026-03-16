@@ -1,5 +1,4 @@
-\contentsline {chapter}{Acknowledgments}{3}{chapter*.2}%
-\contentsline {chapter}{Prologue}{11}{chapter*.4}%
+\contentsline {chapter}{Prologue}{11}{chapter*.3}%
 \contentsline {chapter}{\numberline {1}Introduction}{13}{chapter.1}%
 \contentsline {chapter}{\numberline {2}Hardware}{19}{chapter.2}%
 \contentsline {section}{\numberline {2.1}CPU: Central Processing Unit}{20}{section.2.1}%
@@ -97,7 +96,7 @@
 \contentsline {subsection}{\numberline {4.16.4}Screen refresh}{192}{subsection.4.16.4}%
 \contentsline {chapter}{\numberline {5}Epilogue}{195}{chapter.5}%
 \contentsline {section}{\numberline {5.1}The Dopefish legacy}{196}{section.5.1}%
-\contentsline {chapter}{Appendices}{197}{section*.171}%
+\contentsline {chapter}{Appendices}{197}{section*.170}%
 \contentsline {chapter}{\numberline {A}Unboxing the asset files}{199}{appendix.A}%
 \contentsline {chapter}{\numberline {B}x86 Memory Models}{201}{appendix.B}%
 \contentsline {chapter}{\numberline {C}Dangerous Dave in Copyright Infringement}{205}{appendix.C}%

@@ -3,14 +3,17 @@
 My personal introduction to computer gaming began in 1985, when my parents bought an MSX-1 home computer. I was fascinated by games such as Konami's \textit{Knightmare} and \textit{Nemesis 2}. It was not only the gameplay that intrigued me, but also how such games were created. This curiosity sparked my interest in programming and game development, and I soon began creating my first games in MSX-BASIC.\\
 
 \par
-That same year, Nintendo released \textit{Super Mario Bros.} for the Nintendo Entertainment System (NES). It became an instant blockbuster, combining colorful graphics with remarkably smooth side-scrolling. By comparison, the side-scrolling games I played on the MSX-1, such as Knightmare and Nemesis 2, moved at a constant, noticeably choppy speed.\\
+Around the same time I was introduced to the MSX, Nintendo released \textit{Super Mario Bros.} for the Nintendo Entertainment System (NES). It became an instant blockbuster, combining colorful graphics with remarkably smooth side-scrolling. By comparison, the side-scrolling games I played on the MSX-1, such as Knightmare and Nemesis 2, moved at a constant, noticeably choppy speed.\\
 
 \par
 Super Mario Bros. was different. The player dictated the scrolling speed: you could accelerate from walking to running or jumping, and the screen would smoothly follow your actions. The game was immensely successful, both commercially and critically. It helped popularize the side-scrolling platform genre and served as a killer app for the NES\footnote{Upon release in Japan, 1.2 million copies were sold during its September 1985 release month. Within four months, about 3 million copies were sold in Japan.}. More importantly, it demonstrated the true power of the NES by utilizing a dedicated Picture Processing Unit (PPU) that handled sprites and scrolling independently of the CPU.\\
 
 
 \par
-My MSX-1 home computer lacked any hardware support for smooth scrolling. Other computers, like the MSX-2 and Commodore 64, could scroll up to 8 pixels (one character) horizontally or vertically. However, once that limit was reached, developers had to rely on all kinds of tricks to achieve continuous, full-screen smooth scrolling. This typically involved copying large amounts of data, simply to move the screen by a single character\footnote{Some great programmers succeeded in implementing smooth scrolling on the Commodore 64, most notably in games such as \textit{Uridium} (1986) and \textit{Armalyte} (1988).}. Such approaches were extremely CPU-intensive and often beyond the capabilities of the hardware.\\
+My MSX-1 home computer lacked any hardware support for smooth scrolling. Other computers, like the MSX-2 and Commodore 64, could scroll up to 8 pixels (one character) horizontally or vertically. However, once that limit was reached, developers had to rely on all kinds of tricks to achieve continuous, full-screen smooth scrolling. This typically involved copying large amounts of data, simply to move the screen by a single character. Such approaches were extremely CPU-intensive and often beyond the capabilities of the hardware.\\
+
+\trivia{Some great programmers succeeded in implementing smooth scrolling on the Commodore 64 and MSX-2, most notably in games such as \textit{Uridium} (1986) and \textit{Armalyte} (1988) on the Commodore 64, and \textit{Space Manbow} (1989) on the MSX-2.}\\
+
 
 \par
 The NES was one of the very first home consoles to offer true hardware-supported smooth scrolling. Essentially, the PPU had registers that could be written to, in order to set the fine (pixel) scroll. For example, to scroll the background 120 pixels horizontally and then 22 pixels vertically, you would first write the horizontal scroll value 120, followed by the vertical value 22 to the PPU\footnote{The PPU could only handle one-directional scrolling at a time. So bi-directional scrolling requires twice updating the PPU registers. }. Done deal! The video chip takes care of the rest, running at the same constant speed as it always has.\\
@@ -21,7 +24,6 @@ The NES was one of the very first home consoles to offer true hardware-supported
 \caption{Super Mario Bros on Nintendo Entertainment System}
 \end{figure}
 
-\vspace{10pt}
 \par
 In the late 1980s, the IBM PC lagged far behind the gaming power of the NES. It was designed for office work rather than gaming. It excelled at word processing and crunching numbers in spreadsheets. Although the PC game market was growing rapidly, it was dominated by adventure games (\textit{King's Quest}), role-playing games (\textit{Ultima series}), strategy titles, and simulations (\textit{SimCity}).
 Action and platform games remained largely the domain of consoles and home computers, as the PC lacked hardware support for sprites and smooth scrolling.\\

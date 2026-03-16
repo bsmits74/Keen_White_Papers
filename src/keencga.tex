@@ -26,7 +26,7 @@ The first Commander Keen series, \textit{Commander Keen in Invasion of the Vorti
  
 
 \subsection{CGA Video card}
-The Color Graphics Adapter (CGA), originally also called the Color/Graphics Adapter or IBM Color/Graphics Monitor Adapter, introduced in 1981, was IBM's first color graphics card for the IBM XT.\\
+The Color Graphics Adapter (CGA), originally also called the IBM Color/Graphics Monitor Adapter, introduced in 1981, was IBM's first color graphics card for the IBM XT.\\
 \par
 The CGA card can be summarized by the following hardware:
 \begin{itemize}
@@ -34,6 +34,9 @@ The CGA card can be summarized by the following hardware:
   \item The framebuffer (the VRAM) contained two memory banks of 8KiB each, resulting in 16KiB total.
   \item Character generator ROM, containing a 9x14 font and two 8x8 fonts. This is the same ROM as used on the MDA video card.
 \end{itemize}
+
+\par
+The next page shows the original IBM CGA card, a clunky beast full of discrete components.
 
 \begin{figure}[H]
   \centering 
@@ -114,11 +117,10 @@ Interlacing worked by splitting each video frame into two halves: the odd-number
 \par
 The CGA memory layout in graphics mode utilized a similar interlaced architecture. VRAM was split into two banks: VRAM bank 0, which held even rows of pixels (0, 2, 4, etc.), and VRAM bank 1, which held odd rows of pixels (1, 3, 5, etc.). This layout required additional calculation steps for many CGA graphics operations if the programmer wanted to avoid visual artifacts during screen updates.\\
 
-\par
-In CGA graphics, each pair of two bits represented a single pixel, allowing for a color value between 0 and 3, based on the CGA color palette. The two leftmost bits in a byte represented pixel 0, the next two bits represented pixel 1, and so on. Each byte in VRAM corresponded to four pixels on the screen.\\
+\trivia{Interestingly, interlacing was never actually implemented in CGA monitors. When displaying VRAM to the screen, the CGA used a progressive (linear) scan, alternately reading from bank 0 and bank 1.}\\
 
 \par
-The CGA card employed memory mapping similar to EGA. In Mode 4, VRAM bank 0 is mapped to memory addresses ranging from \cw{B800:0000h} to \cw{B800:1FFFh} (absolute address \cw{B8000h}--\cw{B9FFFh}), and VRAM bank 1 is mapped to \cw{B800:2000h} to \cw{B800:3FFFh} (absolute address \cw{BA000h}--\cw{BBFFFh}). Unlike EGA, the CGA memory model does not require masking because the total 16KiB of VRAM easily fits within a 64KiB memory segment.
+In CGA graphics, each pair of two bits represented a single pixel, allowing for a color value between 0 and 3, based on the CGA color palette. The two leftmost bits in a byte represented pixel 0, the next two bits represented pixel 1, and so on. Each byte in VRAM corresponded to four pixels on the screen.\\
 
 \begin{figure}[H]
 \centering
@@ -127,7 +129,9 @@ The CGA card employed memory mapping similar to EGA. In Mode 4, VRAM bank 0 is m
 \label{fig:cga_interlaced}
 \end{figure}
 
-\trivia{Interestingly, interlacing was never actually implemented in CGA monitors. When displaying VRAM to the screen, the CGA used a progressive (linear) scan, alternately reading from bank 0 and bank 1.}\\
+\par
+The CGA card employed memory mapping similar to EGA. In Mode 4, VRAM bank 0 is mapped to memory addresses ranging from \cw{B800:0000h} to \cw{B800:1FFFh} (absolute address \cw{B8000h}--\cw{B9FFFh}), and VRAM bank 1 is mapped to \cw{B800:2000h} to \cw{B800:3FFFh} (absolute address \cw{BA000h}--\cw{BBFFFh}). Unlike EGA, the CGA memory model does not require masking because the total 16KiB of VRAM easily fits within a 64KiB memory segment.
+
 
 \subsection{Double buffering}
 A full display screen in mode 4 requires 320 pixels$\times$2 bits per pixel$\times$200 lines, which equals 16,000 bytes of memory. Since the display screen consumes all 16KiB of available VRAM, there is no capacity for additional screens. The only way to implement double buffering on a CGA card is by creating a 64KiB buffer in RAM memory.\\
